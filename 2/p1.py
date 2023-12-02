@@ -4,23 +4,37 @@ Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"""
 
-rep = [',', ';', ':']
-for i in rep:
-    input = input.replace(i, '')
+input = input.replace(':', ';')
+input = input.replace(',', '')
+input = input.replace('   ', ' ')
 games = input.split('\n')
 
 sum_ids = 0
 for game in games:
     
-    points = {'blue': 0, 'red': 0, 'green': 0}
-    game = game.split(' ')
+    check = []
+    game = game.split(';')
     
-    prev = len(game) - 1
-    while prev > 1:
-        points[game[prev]] += int(game[prev - 1])
-        prev -= 2
+    for i in game:
+        check.append(i.split(' '))
     
-    if points['red'] <= 12 and points['green'] <= 13 and points['blue'] <= 14:
-        sum_ids += int(game[1])
+    external = len(check) - 1
+    
+    test = 0
+    while external > 0:
+        internal = len(game[external].split(' ')) - 1
+        points = {'blue': 0, 'red': 0, 'green': 0}
 
-print(sum_ids)
+        while internal > 0:
+            points[check[external][internal]] += int(check[external][internal - 1])
+            internal -= 2
+
+        external -= 1
+
+        if points['red'] <= 12 and points['green'] <= 13 and points['blue'] <= 14:
+            test += 1
+    
+    if (len(check) - 1) == test:
+        sum_ids += int(check[0][1])
+
+print('Sum:', sum_ids)
