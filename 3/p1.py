@@ -1,19 +1,10 @@
-input = """467..114..
-...*......
-..35..633.
-......#...
-617*...7..
-.....+.58.
-..592.....
-......755.
-...$.*....
-.664.598.."""
+input = """"""
 
 symbols = ['@', '#', '$', '%', '&', '*', '-', '/', '=', '+']
 total_sum = 0
-engine = input.split('\n')
+engine = input.splitlines()
 engine.insert(0, '.' * 140)
-engine.insert(11, '.' * 140)
+engine.insert(141, '.' * 140)
 
 new_engine = []
 for line in engine:
@@ -50,8 +41,6 @@ def find_nums(line):
           end = i
     
     if num:
-      #nums_and_cords[num] = [start - 1, end + 1]
-
       start -= 1
       end += 1
 
@@ -67,17 +56,10 @@ def find_nums(line):
 
   return nums_and_cords
   
-#x = find_nums(new_engine[1])
-#print(x)
 print('')
 
-#print(find_symbols(new_engine[0]))
-#print(find_symbols(new_engine[1]))
-#print(find_symbols(new_engine[2]))
-#print(find_nums(new_engine[1]))
-
 j = 0
-for line in range(1, (len(new_engine) - 1)):
+for line in range(0, (len(new_engine))):
 
   for key, value in find_nums(new_engine[line]).items():
 
